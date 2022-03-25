@@ -7,6 +7,8 @@
 #' @export
 #' @importFrom shiny shinyApp
 #' @importFrom golem with_golem_options 
+#' @import shinydashboard
+#' @import purrr
 run_app <- function(
   onStart = NULL,
   options = list(), 
