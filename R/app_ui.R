@@ -1,3 +1,4 @@
+# APP UI ====
 #' The application User-Interface
 #' 
 #' @param request Internal parameter for `{shiny}`. 
@@ -10,7 +11,9 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # Your application UI logic 
     dashboardPage(
+      # HEADER ====
       dashboardHeader(title = "Resume Builder"),
+      # SIDEBAR ====
       dashboardSidebar(
         sidebarMenu(
           menuItem("About", tabName = "about", icon = icon("info-sign", lib = "glyphicon")),
@@ -18,10 +21,13 @@ app_ui <- function(request) {
             menuSubItem("Inputs", tabName = "resume_inputs", icon = icon("pencil", lib = "glyphicon")),
             menuSubItem("Build", tabName = "resume_build", icon = icon("list-alt", lib = "glyphicon")))
           )),
+      # BODY ====
       dashboardBody(
         tabItems(
+          ## TAB: About ====
           tabItem(tabName = "about",
                   includeMarkdown("R/About.md")),
+          ## TAB: Resume > Inputs ====
           tabItem(tabName = "resume_inputs",
                   fluidRow(
                     column(width = 3,
@@ -75,7 +81,7 @@ app_ui <- function(request) {
                                         number = 6),
                       )
                     ),
-                    tabBox(title = "Proffesional Experience",
+                    tabBox(title = "Professional Experience",
                            width = 12,
                            experience_tabPanel(id = "survey_inputs_experience", 
                                                number = 1),
@@ -91,32 +97,42 @@ app_ui <- function(request) {
                                                number = 6),
                            )
                   )),
+          ## TAB: Resume > Build ====
           tabItem(tabName = "resume_build",
                   fluidRow(
-                    box(
-                      title = "Build Parameters",
-                      column(width = 6,
-                             radioButtons("build_from",
-                                          label = "Build From:",
-                                          choices = c("Template", "Survey"),
-                                          selected = "Template")),
-                      column(width = 6,
-                             conditionalPanel(
-                               condition = "input.build_from=='Template'",
-                               fileInput("upload_template",
-                                         label = "Upload Template"),
-                               actionButton("generate_template",
-                                            label = "Generate PDF")
-                             ),
-                             conditionalPanel(
-                               condition = "input.build_from=='Survey'",
-                               actionButton("generate_survey",
-                                            label = "Generate PDF")
-                             ))
-                      )
-                      
+                    column(width = 4),
+                    box(title = "Build Parameters",
+                        width = 4,
+                        height = "190px",
+                        status = "primary",
+                        solidHeader = TRUE,
+                        column(
+                          width = 6,
+                          radioButtons(
+                            "build_from",
+                            label = "Build From:",
+                            choices = c("Template", "Survey"),
+                            selected = "Template"
+                          )
+                        ), 
+                        column(
+                          width = 6,
+                          downloadButton("generate_resume",
+                                         label = "Generate Resume"),
+                          br(),
+                          br(),
+                          conditionalPanel(
+                            condition = "input.build_from=='Template'",
+                            fileInput("upload_template",
+                                      label = "Upload Template")
+                          ),
+                          conditionalPanel(
+                            condition = "input.build_from=='Survey'"
+                            )
+                        )
+                    ),
+                    column(width = 4)
                     )
-                  
                   )
         )
       )
@@ -124,7 +140,8 @@ app_ui <- function(request) {
   )
 }
 
-#' Add external Resources to the Application
+# EXTERNAL RESOURCES ====
+#' Add external Resources to the Application 
 #' 
 #' This function is internally used to add external 
 #' resources inside the Shiny application. 
