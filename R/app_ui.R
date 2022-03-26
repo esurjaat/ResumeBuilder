@@ -29,15 +29,6 @@ app_ui <- function(request) {
                   includeMarkdown("R/About.md")),
           ## TAB: Resume > Inputs ====
           tabItem(tabName = "resume_inputs",
-                  fluidRow(
-                    column(width = 3,
-                           downloadButton("template_empty", 
-                                          label = "Download Empty Template (.xlsx)")
-                           ),
-                    column(width = 3,
-                           downloadButton("template_filled",
-                                          label = "Download Survey as Template (.xlsx)"))
-                  ),
                   br(),
                   fluidRow(
                     box(
@@ -47,12 +38,34 @@ app_ui <- function(request) {
                       status = "primary",
                       mod_survey_inputs_contact_ui("survey_inputs_contact_1")
                     ),
-                    box(
+                    tabBox(
                       title = "Education",
                       width = 3,
-                      solidHeader = FALSE,
-                      status = "primary",
-                      mod_survey_inputs_education_ui("survey_inputs_education_1")
+                      tabPanel(title = "1",
+                               width = 3,
+                               solidHeader = FALSE,
+                               status = "primary",
+                               mod_survey_inputs_education_ui("survey_inputs_education_1")),
+                      tabPanel(title = "2",
+                               width = 3,
+                               solidHeader = FALSE,
+                               status = "primary",
+                               mod_survey_inputs_education_ui("survey_inputs_education_2")),
+                      tabPanel(title = "3",
+                               width = 3,
+                               solidHeader = FALSE,
+                               status = "primary",
+                               mod_survey_inputs_education_ui("survey_inputs_education_3")),
+                      tabPanel(title = "4",
+                               width = 3,
+                               solidHeader = FALSE,
+                               status = "primary",
+                               mod_survey_inputs_education_ui("survey_inputs_education_4")),
+                      tabPanel(title = "5",
+                               width = 3,
+                               solidHeader = FALSE,
+                               status = "primary",
+                               mod_survey_inputs_education_ui("survey_inputs_education_5"))
                     ),
                     column(
                       width = 6,
@@ -67,17 +80,17 @@ app_ui <- function(request) {
                         title = "Skills",
                         width = NULL,
                         height = "272px",
-                        skills_tabPanel(id = "survey_inputs_experience",
+                        skills_tabPanel(id = "survey_inputs_skills",
                                         number = 1),
-                        skills_tabPanel(id = "survey_inputs_experience",
+                        skills_tabPanel(id = "survey_inputs_skills",
                                         number = 2),
-                        skills_tabPanel(id = "survey_inputs_experience",
+                        skills_tabPanel(id = "survey_inputs_skills",
                                         number = 3),
-                        skills_tabPanel(id = "survey_inputs_experience",
+                        skills_tabPanel(id = "survey_inputs_skills",
                                         number = 4),
-                        skills_tabPanel(id = "survey_inputs_experience",
+                        skills_tabPanel(id = "survey_inputs_skills",
                                         number = 5),
-                        skills_tabPanel(id = "survey_inputs_experience",
+                        skills_tabPanel(id = "survey_inputs_skills",
                                         number = 6),
                       )
                     ),
@@ -96,6 +109,17 @@ app_ui <- function(request) {
                            experience_tabPanel(id = "survey_inputs_experience", 
                                                number = 6),
                            )
+                  ),
+                  fluidRow(
+                    box(
+                      title = "Download Templates",
+                      status = "primary",
+                      width = 12,
+                      column(width = 3,
+                             mod_survey_download_templateEmpty_ui("survey_download_templateEmpty_1")),
+                      column(width = 3,
+                             mod_survey_download_templateFilled_ui("survey_download_templateFilled_1"))
+                    )
                   )),
           ## TAB: Resume > Build ====
           tabItem(tabName = "resume_build",
@@ -117,17 +141,19 @@ app_ui <- function(request) {
                         ), 
                         column(
                           width = 6,
-                          downloadButton("generate_resume",
-                                         label = "Generate Resume"),
-                          br(),
-                          br(),
                           conditionalPanel(
                             condition = "input.build_from=='Template'",
+                            downloadButton("generate_resume_template",
+                                           label = "Generate Resume"),
+                            br(),
+                            br(),
                             fileInput("upload_template",
                                       label = "Upload Template")
                           ),
                           conditionalPanel(
-                            condition = "input.build_from=='Survey'"
+                            condition = "input.build_from=='Survey'",
+                            downloadButton("generate_resume_survey",
+                                           label = "Generate Resume")
                             )
                         )
                     ),
