@@ -8,10 +8,10 @@ your resumé. This project supplements Yihui Xie's [pagedown](https://pagedown.r
 
 **Steps:**  
 
-1.  Download template or fill out questionnaire in the **Resume > Inputs** tab.
+1.  **Resume > Input.** Download template *OR*  fill out survey.
 
-2.  Upload filled out template or choose *questionnaire* as the source in the 
-**Resume > Build** tab.  
+2.  **Resume > Build.** Upload filled out template or choose *questionnaire* as 
+the source.  
 
 3.  Click the *Generate* button in the **Resume > Build** tab to view and *Download*
 when ready.

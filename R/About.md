@@ -4,8 +4,9 @@ project supplements Yihui Xie’s [pagedown](https://pagedown.rbind.io/).
 
 **Steps:**
 
-1.  Download template or fill out questionnaire in the **Resume &gt;
-    Inputs** tab.
+1.  **\[Resume &gt;Input\]** Download template  
+    *OR*  
+    fill out questionnaire in the
 
 2.  Upload filled out template or choose *questionnaire* as the source
     in the **Resume &gt; Build** tab.
