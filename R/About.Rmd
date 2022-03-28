@@ -3,17 +3,15 @@ output: md_document
 ---
 
 **Welcome!** Create professional looking resumés.
-Simply use the provided questionnaire or excel template to generate
-your resumé. This project supplements Yihui Xie's [pagedown](https://pagedown.rbind.io/).
+Simply fill out the provided survey or download the  excel template to generate your resumé. This project supplements Yihui Xie's [pagedown](https://pagedown.rbind.io/).
 
 **Steps:**  
 
 1.  **Resume > Input.** Download template *OR*  fill out survey.
 
-2.  **Resume > Build.** Upload filled out template or choose *questionnaire* as 
+2.  **Resume > Build.** Upload filled out template or choose *Survey* as 
 the source.  
 
-3.  Click the *Generate* button in the **Resume > Build** tab to view and *Download*
-when ready.
+3.  **Resume > Build.** Push the *Generate* button to download the Resume in pdf format.
 
 
