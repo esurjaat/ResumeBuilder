@@ -60,12 +60,7 @@ app_ui <- function(request) {
                                width = 3,
                                solidHeader = FALSE,
                                status = "primary",
-                               mod_survey_inputs_education_ui("survey_inputs_education_4")),
-                      tabPanel(title = "5",
-                               width = 3,
-                               solidHeader = FALSE,
-                               status = "primary",
-                               mod_survey_inputs_education_ui("survey_inputs_education_5"))
+                               mod_survey_inputs_education_ui("survey_inputs_education_4"))
                     ),
                     column(
                       width = 6,
@@ -143,17 +138,14 @@ app_ui <- function(request) {
                           width = 6,
                           conditionalPanel(
                             condition = "input.build_from=='Template'",
-                            downloadButton("generate_resume_template",
-                                           label = "Generate Resume"),
+                            mod_build_resume_template_ui("build_resume_template_1"),
                             br(),
                             br(),
-                            fileInput("upload_template",
-                                      label = "Upload Template")
+                            mod_upload_template_ui("upload_template_1")
                           ),
                           conditionalPanel(
                             condition = "input.build_from=='Survey'",
-                            downloadButton("generate_resume_survey",
-                                           label = "Generate Resume")
+                            mod_build_resume_survey_ui("build_resume_survey_1")
                             )
                         )
                     ),
