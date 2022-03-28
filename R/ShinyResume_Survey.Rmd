@@ -1,0 +1,183 @@
+---
+title: "Resume"
+author: Eric Surjaatmadja
+date: "`r Sys.Date()`"
+output:
+  pagedown::html_resume:
+    # set it to true for a self-contained HTML page but it'll take longer to render
+    self_contained: false
+# uncomment this line to produce HTML and PDF in RStudio:
+knit: pagedown::chrome_print
+params:
+  full_name: NA,
+  email: NA,
+  phone: NA,
+  github_name: NA,
+  linkedin_name: NA,
+  school_name: NA,
+  degree: NA,
+  minor: NA,
+  city_state_education: NA,
+  grad_date: NA,
+  job_title: NA,
+  company: NA,
+  city_state_experience: NA,
+  start_date_experience: NA,
+  end_date_experience: NA,
+  bp_1: NA,
+  bp_2: NA,
+  bp_3: NA,
+  bp_4: NA,
+  bp_5: NA,
+  bp_6: NA,
+  objective: NA,
+  skill_name: NA,
+  skill_description: NA,
+  skill_descriptors: TRUE
+  
+---
+``` {r libraries, include = FALSE}
+library(tidyverse)
+library(tidyr)
+library(readxl)
+library(lubridate)
+```
+
+
+``` {r variables, echo = FALSE, include = FALSE}
+full_name <- params$full_name
+email <- params$email
+phone <- params$phone
+github_name <- params$github_name
+github_link <- paste("https:://", github_name)
+linkedin_name <- params$linkedin_name
+linkedin_link <- paste("https:://", linkedin_name)
+objective <- params$objective
+skills_descriptors <-
+  if (length(params$skill_name > 0)) {
+    pmap(
+      .l = list(
+        x = params$skill_name,
+        y = params$skill_description
+      ),
+      .f = function(x, y) {
+        paste0("- **", x, "** - ", y, "\n\n")
+      }
+    ) %>%
+      unlist() %>% 
+      paste(collapse = "")
+  } else {
+    NA
+  }
+
+skills_noDescriptors <- 
+  if (length(params$skill_name > 0)) {
+    pmap(
+      .l = list(
+        x = params$skill_name
+      ),
+      .f = function(x, y) {
+        paste0("- **", x, "**\n\n")
+      }
+    ) %>%
+      unlist() %>% 
+      paste(collapse = "")
+  } else {
+    NA
+  }
+
+education <- 
+  pmap(.l = 
+       list(name = params$school_name,
+            degree = params$degree,
+            minor = params$minor,
+            where = params$city_state_education,
+            grad = params$grad_date),
+     .f = function(name, degree, minor, where, grad) {
+       paste(
+         paste0("### ", name),
+         degree,
+         where,
+         paste0("Grad Date:", ymd(grad) %>% format.Date(format = "%b '%y")),
+         if(!is.na(minor)){paste0("Minored in ", minor)},
+         sep = "\n\n"
+         )
+     }) %>% 
+  unlist() %>% 
+  paste0(collapse = "") 
+
+professional <- 
+  pmap(.l = 
+         list(title = params$job_title,
+              company = params$company,
+              where = params$city_state_experience,
+              from = params$start_date_experience,
+              to = params$end_date_experience,
+              bp1 = params$bp_1,
+              bp2 = params$bp_2,
+              bp3 = params$bp_3,
+              bp4 = params$bp_4,
+              bp5 = params$bp_5,
+              bp6 = params$bp_6),
+       .f = function(title, company, where, from, to, bp1, bp2, bp3, bp4, bp5, bp6){
+         paste(
+           paste0("### ", title),
+           company,
+           where,
+           paste(
+             year(from), 
+             year(to), 
+             sep = " - "),
+           paste0(
+             "::: consice\n",
+             paste0("- ", bp1, "\n"),
+             if(!is.na(bp2)){paste0("- ", bp2, "\n")},
+             if(!is.na(bp3)){paste0("- ", bp3, "\n")},
+             if(!is.na(bp4)){paste0("- ", bp4, "\n")},
+             if(!is.na(bp5)){paste0("- ", bp5, "\n")},
+             if(!is.na(bp6)){paste0("- ", bp6, "\n")},
+             ":::\n\n"),
+           sep = "\n\n")
+       }) %>% 
+  unlist() %>% 
+  paste(collapse = "")
+```
+
+Aside
+================================================================================
+
+Contact Info {#contact}
+--------------------------------------------------------------------------------
+
+- <i class="fa fa-envelope"></i> `r email`
+- <i class="fa fa-github"></i> [`r github_name`](`r github_link`)
+- <i class="fa fa-linkedin"></i> [`r linkedin_name`](`r linkedin_link`)
+- <i class="fa fa-phone"></i> `r phone`
+- For more information, please contact me via email.
+
+
+Skills {#skills}
+--------------------------------------------------------------------------------
+
+
+`r if(params$skill_descriptors == TRUE){skills_descriptors}else{skills_noDescriptors}`
+
+
+Main
+================================================================================
+
+`r full_name` {#title}
+--------------------------------------------------------------------------------
+
+### `r objective`
+
+Education {data-icon=graduation-cap data-concise=true}
+--------------------------------------------------------------------------------
+
+`r education`
+
+Professional Experience {data-icon=suitcase}
+--------------------------------------------------------------------------------
+
+`r professional`
+
