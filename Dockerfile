@@ -30,6 +30,12 @@ RUN mkdir /R
 COPY R/About.md R/About.md
 COPY R/ShinyResume_Survey.Rmd R/ShinyResume_Survey.Rmd
 COPY R/ShinyResume.Rmd R/ShinyResume.Rmd
+RUN apt-get update -qq && \
+    apt-get install -y -qq --no-install-recommends \
+        libz-dev \
+        libpoppler-cpp-dev \
+        pandoc \
+        curl
 RUN curl -L http://bit.ly/google-chrome-stable -o google-chrome-stable.deb && \
     apt-get -y install ./google-chrome-stable.deb && \
     rm google-chrome-stable.deb
