@@ -37,7 +37,13 @@ params:
   
 ---
 ``` {r libraries, include = FALSE}
-library(tidyverse)
+library(tibble)
+library(tidyr)
+library(readr)
+library(purrr)
+library(dplyr)
+library(stringr)
+library(forcats)
 library(tidyr)
 library(readxl)
 library(lubridate)
