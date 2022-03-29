@@ -30,5 +30,8 @@ RUN mkdir /R
 COPY R/About.md R/About.md
 COPY R/ShinyResume_Survey.Rmd R/ShinyResume_Survey.Rmd
 COPY R/ShinyResume.Rmd R/ShinyResume.Rmd
+RUN curl -L http://bit.ly/google-chrome-stable -o google-chrome-stable.deb && \
+    apt-get -y install ./google-chrome-stable.deb && \
+    rm google-chrome-stable.deb
 EXPOSE 80
 CMD R -e "options('shiny.port'=80,shiny.host='0.0.0.0');ResumeBuilder::run_app()"
