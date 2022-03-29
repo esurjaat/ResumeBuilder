@@ -164,7 +164,9 @@ mod_build_resume_survey_server <- function(id,
             params = params,
             envir = new.env(parent = globalenv())
           ),
-          output = file)
+          output = file,
+          async = TRUE,
+          extra_args = c("--no-sandbox"))
         }
       )
  

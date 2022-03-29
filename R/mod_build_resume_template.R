@@ -39,7 +39,9 @@ mod_build_resume_template_server <- function(id, template_upload){
             params = params,
             envir = new.env(parent = globalenv())
           ),
-          output = file)
+          output = file,
+          async = TRUE,
+          extra_args = c("--no-sandbox"))
         }
       )
  
