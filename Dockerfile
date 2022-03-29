@@ -24,10 +24,11 @@ RUN Rscript -e 'remotes::install_version("golem",upgrade="never", version = "0.3
 RUN mkdir /build_zone
 ADD . /build_zone
 WORKDIR /build_zone
+RUN R -e 'remotes::install_local(upgrade="never")'
+RUN rm -rf /build_zone
+RUN mkdir /R
 COPY R/About.md R/About.md
 COPY R/ShinyResume_Survey.Rmd R/ShinyResume_Survey.Rmd
 COPY R/ShinyResume.Rmd R/ShinyResume.Rmd
-RUN R -e 'remotes::install_local(upgrade="never")'
-RUN rm -rf /build_zone
 EXPOSE 80
 CMD R -e "options('shiny.port'=80,shiny.host='0.0.0.0');ResumeBuilder::run_app()"
