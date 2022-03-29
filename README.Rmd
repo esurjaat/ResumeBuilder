@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 The goal of ResumeBuilder is to create great looking resumes using simple user inputs or by uploading pre-filled templates.  This project supplements Yihui Xie's [pagedown](https://pagedown.rbind.io/).
 
 ## App
-You may find the app at the folloiwng address:
+You may find the app at https://resume-builder-x39to.ondigitalocean.app/
 
 ## Steps  
 

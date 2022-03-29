@@ -12,7 +12,8 @@ supplements Yihui Xie’s [pagedown](https://pagedown.rbind.io/).
 
 ## App
 
-You may find the app at the folloiwng address:
+You may find the app at
+<https://resume-builder-x39to.ondigitalocean.app/>
 
 ## Steps
 
