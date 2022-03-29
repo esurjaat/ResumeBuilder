@@ -24,7 +24,6 @@ RUN Rscript -e 'remotes::install_version("golem",upgrade="never", version = "0.3
 RUN mkdir /build_zone
 ADD . /build_zone
 WORKDIR /build_zone
-RUN mkdir R
 COPY R/About.md R/About.md
 COPY R/ShinyResume_Survey.Rmd R/ShinyResume_Survey.Rmd
 COPY R/ShinyResume.Rmd R/ShinyResume.Rmd
