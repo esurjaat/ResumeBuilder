@@ -13,7 +13,13 @@ params:
   skill_descriptors: FALSE
 ---
 ``` {r libraries, include = FALSE}
-library(tidyverse)
+library(tibble)
+library(tidyr)
+library(readr)
+library(purrr)
+library(dplyr)
+library(stringr)
+library(forcats)
 library(tidyr)
 library(readxl)
 library(lubridate)
@@ -21,6 +27,7 @@ library(lubridate)
 
 
 ``` {r variables, echo = FALSE, include = FALSE}
+setwd("../data")
 path <- params$source_filename
 sheet_names <- readxl::excel_sheets(path = path)
 variables <- 
